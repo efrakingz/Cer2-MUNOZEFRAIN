@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión - Tienda Verde</title>
+  {% load static %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <style>
+    @font-face {
+      font-family: 'SimpleBirthday';
+      src: url('path-to-your-font/SimpleBirthday.woff2') format('woff2'),
+           url('path-to-your-font/SimpleBirthday.woff') format('woff');
+    }
+
+    body {
+      font-family: 'SimpleBirthday', sans-serif;
+      background-color: #DAD7CD;
+      color: #344E41;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .navbar {
+      background-color: #A3B18A;
+    }
+    .navbar-brand, .nav-link {
+      color: #344E41;
+    }
+    .nav-link:hover {
+      color: #588157;
+    }
+    .login-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-form {
+      background-color: #A3B18A;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    .user-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1.5rem;
+    }
+    .user-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .form-control {
+      background-color: #DAD7CD;
+      border: 1px solid #3A5A40;
+      color: #344E41;
+    }
+    .form-control::placeholder {
+      color: #588157;
+    }
+    .btn-primary {
+      background-color: #588157;
+      border: 1px solid #3A5A40;
+      color: #DAD7CD;
+      transition: background-color 0.3s, transform 0.3s ease-in-out;
+    }
+    .btn-primary:hover {
+      background-color: #3A5A40;
+      transform: scale(1.05);
+    }
+    h2 {
+      font-family: 'SimpleBirthday', sans-serif;
+      color: #344E41;
+    }
+    .form-check-label, a {
+      color: #344E41;
+    }
+  </style>
+</head>
+<body>
+  <!-- MENU -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'index' %}">Tienda Verde</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'registro' %}">Registrarse</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="login-container">
+    <div class="login-form">
+      <div class="user-icon">
+        <img src="{% static 'img/usuario.png' %}" alt="User Icon">
+      </div>
+      
+      <h2 class="text-center mb-4">Iniciar Sesión</h2>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <input type="text" class="form-control" id="username" name="username" placeholder="Usuario" required>
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
+        </div>
+        <div class="d-grid ">
+          <button type="submit" class="btn btn-primary">INICIAR SESIÓN</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
